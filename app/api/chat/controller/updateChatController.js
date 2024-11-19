@@ -54,4 +54,8 @@ export async function desactivateChat(chatId) {
         await transaction.rollback();
         return NextResponse.json({ error: "Error deactivating chat" }, { status: 500 });
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1422b0432a426a22468eade71e2fc9d37d16d83f

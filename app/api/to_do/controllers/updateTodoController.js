@@ -1,27 +1,14 @@
-<<<<<<< HEAD
-import { ToDo } from "@/db/init";
-import { NextResponse } from "next/server";
-
-export async function changeStatus(data) {
-    console.log(data);
-
-=======
 import { Chat, ChatParticipant, ToDo } from "@/db/init";
 import { NextResponse } from "next/server";
 
 export async function changeStatus(data) {
->>>>>>> 1422b0432a426a22468eade71e2fc9d37d16d83f
     if (!data) {
         return NextResponse.json({ message: "Bad request" }, { status: 400 });
     }
     if (!data.id || data.id <= 0) {
         return NextResponse.json({ message: "Bad request" }, { status: 400 });
     }
-<<<<<<< HEAD
-    if (!data.status || data.status.trim() === "" || data.status !== "COMPLETED" && data.status !== "PENDING") {
-=======
     if (!data.status || data.status.trim() === "" || (data.status !== "COMPLETED" && data.status !== "PENDING")) {
->>>>>>> 1422b0432a426a22468eade71e2fc9d37d16d83f
         return NextResponse.json({ message: "Bad request" }, { status: 400 });
     }
 
@@ -51,7 +38,6 @@ export async function changeStatus(data) {
 }
 
 export async function asignToWorker(data) {
-    console.log(data);
 
     if (!data) {
         return NextResponse.json({ message: "Bad request need data" }, { status: 400 });
@@ -62,12 +48,9 @@ export async function asignToWorker(data) {
     if (!data.workerId || data.workerId.trim() === "") {
         return NextResponse.json({ message: "Bad request need worker" }, { status: 400 });
     }
-<<<<<<< HEAD
-=======
     if (!data.userId || data.userId.trim() === "") {
         return NextResponse.json({ message: "Bad request need user" }, { status: 400 });
     }
->>>>>>> 1422b0432a426a22468eade71e2fc9d37d16d83f
 
     try {
         const transaction = await ToDo.sequelize.transaction();
@@ -79,11 +62,6 @@ export async function asignToWorker(data) {
             }
             todo.workerId = data.workerId;
             await todo.save();
-<<<<<<< HEAD
-            await transaction.commit();
-            return NextResponse.json({ message: "To do updated successfully" }, { status: 200 });
-        } catch (err) {
-=======
             const chat = await Chat.create({
                 type: "PRIVATE",
             });
@@ -101,19 +79,12 @@ export async function asignToWorker(data) {
             return NextResponse.json({ message: "To do updated successfully" }, { status: 200 });
         } catch (err) {
             console.log(err);
->>>>>>> 1422b0432a426a22468eade71e2fc9d37d16d83f
             transaction.rollback();
             return NextResponse.json({ message: err }, { status: 400 });
         }
     } catch (error) {
-<<<<<<< HEAD
-        return NextResponse.json({ message: "Bad request" }, { status: 400 });
-    }
-}
-=======
         console.log(error);
 
         return NextResponse.json({ message: "Bad request" }, { status: 400 });
     }
 }
->>>>>>> 1422b0432a426a22468eade71e2fc9d37d16d83f
